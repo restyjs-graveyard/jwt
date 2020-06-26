@@ -1,18 +1,24 @@
-import resty, { Controller, Get, Inject } from "@restyjs/core";
+import resty, { Controller, Get, Inject, Context } from "@restyjs/core";
 import { JWTConfiguration, JWTProvider, ValidateJWT } from "../src/index";
 
 @Controller("/")
 class HelloController {
-  constructor(@Inject() private readonly jwtProvider: JWTProvider) {}
+  @Inject() jwtProvider!: JWTProvider;
 
   @Get("/generate")
   generate() {
-    return "Hello World";
+    return {
+      token: this.jwtProvider.generate({
+        id: 1,
+      }),
+    };
   }
 
   @Get("/validate", [ValidateJWT])
-  validate() {
-    return "Hello World";
+  validate(ctx: Context) {
+    return {
+      token: ctx.req.token,
+    };
   }
 }
 

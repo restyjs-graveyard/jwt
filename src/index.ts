@@ -1,6 +1,5 @@
-import { Provider, Service, Container, RequestHandler } from "@restyjs/core";
-// import jwt from "express-jwt";
-import { verify } from "jsonwebtoken";
+import jwt, { JwtHeader } from "jsonwebtoken";
+import { Service, Provider, Container } from "@restyjs/core";
 
 const getTokenFromHeader = (req: any) => {
   if (
@@ -24,29 +23,50 @@ class JWTProvider implements Provider {
   }
 
   build() {
-    process.env.JWTProvider_JWT_SECRET = this.secret;
+    // process.env.JWTProvider_JWT_SECRET = this.secret;
+  }
+
+  public verify(token: string): Promise<any> {
+    return new Promise((resolve, reject) => {
+      jwt.verify(token, this.secret, (err: any, decoded: any) => {
+        if (err) {
+          reject(err);
+          return;
+        }
+        resolve(decoded);
+      });
+    });
+  }
+
+  public generate(payload: string | Buffer | object): string {
+    return jwt.sign(payload, this.secret);
   }
 }
 
 const ValidateJWT = async (req: any, res: any, next: any) => {
-  const secret = process.env.JWTProvider_JWT_SECRET as string;
-  const token = getTokenFromHeader(req);
-  verify(token, secret, (err: any, decoded: any) => {
-    if (err) {
-      next(err);
-    }
-
-    console.log(decoded);
-  });
-
-  req["token"] = token;
-  return next();
+  try {
+    // const secret = process.env.JWTProvider_JWT_SECRET as string;
+    const provider: JWTProvider = Container.get(JWTProvider);
+    const decoded = await provider.verify(getTokenFromHeader(req));
+    req["token"] = decoded;
+    return next();
+  } catch (error) {
+    next(error);
+  }
 };
 
 function JWTConfiguration(secret: string): JWTProvider {
   const provider = new JWTProvider(secret);
   Container.set(JWTProvider, provider);
   return provider;
+}
+
+declare global {
+  namespace Express {
+    export interface Request {
+      token: any;
+    }
+  }
 }
 
 export { JWTConfiguration, JWTProvider, getTokenFromHeader, ValidateJWT };

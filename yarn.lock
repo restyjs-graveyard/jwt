@@ -464,7 +464,7 @@
     "@types/yargs" "^15.0.0"
     chalk "^4.0.0"
 
-"@restyjs/core@0.0.1-alpha.16":
+"@restyjs/core@^0.0.1-alpha.16":
   version "0.0.1-alpha.16"
   resolved "https://registry.yarnpkg.com/@restyjs/core/-/core-0.0.1-alpha.16.tgz#e3a77e67ee546f30ad8721bc688fb9958b6fa740"
   integrity sha512-+WHj9NdwUGujq1YKQZ0UwZZoUv+uE4XNDmje5/nAWF5jj7Y5FdV1k+9MglOxmB6owdBywVvRKEQsV6GFkfKIVw==
