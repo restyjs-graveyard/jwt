@@ -35,6 +35,7 @@
   "scripts": {
     "build": "tsc --build",
     "test": "jest",
+    "dev": "ts-node example/main.ts",
     "release": "yarn publish --access public"
   },
   "dependencies": {
