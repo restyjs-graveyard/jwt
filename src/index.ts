@@ -1,5 +1,5 @@
-import jwt, { JwtHeader } from "jsonwebtoken";
-import { Service, Provider, Container } from "@restyjs/core";
+import jwt from "jsonwebtoken";
+import { Service, Provider, Container, HTTPError } from "@restyjs/core";
 
 const getTokenFromHeader = (req: any) => {
   if (
@@ -46,11 +46,19 @@ class JWTProvider implements Provider {
 const ValidateJWT = async (req: any, res: any, next: any) => {
   try {
     // const secret = process.env.JWTProvider_JWT_SECRET as string;
+    const token = getTokenFromHeader(req);
+    if (!token) {
+      throw new HTTPError("Unauthorized", 401);
+    }
     const provider: JWTProvider = Container.get(JWTProvider);
-    const decoded = await provider.verify(getTokenFromHeader(req));
+    const decoded = await provider.verify(token);
     req["token"] = decoded;
     return next();
   } catch (error) {
+    if (error.name === "TokenExpiredError") {
+      next(new HTTPError("Unauthorized, Token Expired", 401));
+      return;
+    }
     next(error);
   }
 };

@@ -6,11 +6,15 @@ class HelloController {
   @Inject() jwtProvider!: JWTProvider;
 
   @Get("/generate")
-  generate() {
+  async generate() {
+    const token = await this.jwtProvider.generate({
+      id: 1,
+      email: "foo@bar.com",
+      exp: new Date().getTime() / 1000,
+    });
+
     return {
-      token: this.jwtProvider.generate({
-        id: 1,
-      }),
+      token,
     };
   }
 
