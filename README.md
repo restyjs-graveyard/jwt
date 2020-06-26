@@ -5,17 +5,20 @@ JWT middleware for resty.js.
 import resty, { Controller, Get, Inject, Context } from "@restyjs/core";
 import { JWTConfiguration, JWTProvider, ValidateJWT } from "@restyjs/jwt";
 
+
 @Controller("/")
 class HelloController {
   @Inject() jwtProvider!: JWTProvider;
 
   @Get("/generate")
-  generate() {
+  async generate() {
+    const token = await this.jwtProvider.generate({
+      id: 1,
+      email: "foo@bar.com",
+    });
+
     return {
-      token: this.jwtProvider.generate({
-        id: 1,
-        email: "foo@bar.com",
-      }),
+      token,
     };
   }
 
@@ -33,4 +36,5 @@ const app = resty({
 });
 
 app.listen(8080);
+
 ```
