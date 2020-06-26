@@ -45,10 +45,10 @@
     "jsonwebtoken": "^8.5.1"
   },
   "peerDependencies": {
-    "@restyjs/core": "0.0.1-alpha.15"
+    "@restyjs/core": "0.0.1-alpha.16"
   },
   "devDependencies": {
-    "@restyjs/core": "0.0.1-alpha.15",
+    "@restyjs/core": "0.0.1-alpha.16",
     "@types/jest": "^26.0.3",
     "@types/supertest": "^2.0.9",
     "jest": "^26.0.1",
