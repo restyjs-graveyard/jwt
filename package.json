@@ -41,7 +41,7 @@
   "dependencies": {
     "@types/express-jwt": "^0.0.42",
     "@types/jsonwebtoken": "^8.5.0",
-    "express-jwt": "^5.3.3",
+    "express-jwt": "^6.0.0",
     "jsonwebtoken": "^8.5.1"
   },
   "peerDependencies": {
