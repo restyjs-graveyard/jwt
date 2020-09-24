@@ -38,8 +38,8 @@ class JWTProvider implements Provider {
     });
   }
 
-  public generate(payload: string | Buffer | object): string {
-    return jwt.sign(payload, this.secret);
+  public generate(payload: string | Buffer | object, options?: jwt.SignOptions): string {
+    return jwt.sign(payload, this.secret, options);
   }
 }
 
