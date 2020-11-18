@@ -482,10 +482,10 @@
     "@types/yargs" "^15.0.0"
     chalk "^4.0.0"
 
-"@restyjs/core@1.0.6":
-  version "1.0.6"
-  resolved "https://registry.yarnpkg.com/@restyjs/core/-/core-1.0.6.tgz#a919267a4dd2459ffcd061e957ec2172f34d0ba2"
-  integrity sha512-evOvSr7YVtGSHti3JdrtvTSHEs1q+vplFRK/NRZCw3ygOgcOixy5hw8lTF9tAw6CmPhZY+hKIfofHagDyp4peA==
+"@restyjs/core@1.0.7":
+  version "1.0.7"
+  resolved "https://registry.yarnpkg.com/@restyjs/core/-/core-1.0.7.tgz#5b3eadc8a9bc1f95c0db16f9470bbce860790aee"
+  integrity sha512-IHfd1aE32sPeTZHUuaR69GHUwIeOaYJQxBFAKTTY8jbVuvmanLAkulagxz8QJraCRAVHir1hsnSrMT1YI743lg==
   dependencies:
     "@types/body-parser" "^1.19.0"
     "@types/express" "^4.17.6"
