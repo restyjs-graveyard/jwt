@@ -1,6 +1,6 @@
 {
   "name": "@restyjs/jwt",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "JWT middleware for resty.js.",
   "homepage": "https://restyjs.com",
   "main": "index.js",
